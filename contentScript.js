@@ -30,7 +30,7 @@ switch(domain){
 	break;
 	
 	default:
-	alert("<b>Muhestores message:<b>\nPlease go to the merchant's site checkout page"+ domain);
+	alert("MUHESTORES MESSAGE:\nPlease go to the merchant's site checkout page");
 	}
 
 function asos(){

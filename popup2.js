@@ -258,7 +258,8 @@ function addToCart(){
    if (msg.taille)document.getElementById('taille').innerHTML = msg.taille;
    if (msg.quantity)document.getElementById('quantitay').innerHTML = msg.quantitay;
    if (msg.prix)document.getElementById('prix').innerHTML = msg.prix;
-   if (msg.nombre) {document.getElementById('quantity').textContent = msg.quty;
+   if (msg.nombre) {document.getElementById('quantity').textContent ="Items :"+ msg.quty;
+  // localStorage.clear();
    localStorage.setItem("numOfItems", msg.quty)};
  
    if (msg.total){document.getElementById('subtotal').textContent = msg.subtotal;    
