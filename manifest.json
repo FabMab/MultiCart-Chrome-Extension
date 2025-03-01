@@ -3,13 +3,7 @@
 
 	"name": "Muhestores Extension",
 	"description": "Muhestores extension for Chrome",
-	"version": "1.0",
-	"author": "@FabMak",
-	"externally_connectable": {
-        "ids":["*"],
-		"matches":["http://localhost/index.html"]
-    },
-
+	
 	//"background": {
 	//	"service-worker": "popup2.js"
 
@@ -19,7 +13,7 @@
         "tabs",
 		"activeTab",
 		"storage",
-		"scripting"
+		"scripting"	
 		//"https://*/asos.com/*/",
        // "https://www.boohoo.com/*/"
 		
@@ -27,21 +21,21 @@
         //"https://*/"
 		
     ],
-	
-  "host_permissions": [
-     // "https://*/asos.com/*/",
-     //   "https://www.boohoo.com/*/",
-		"http://localhost/index.html"
-   ],
+
+	"host_permissions": [
+	],
 	"action": {
 		"default_popup": "popup.html",
 		
 		"default_icon":{
-       // "16": "images/icon-16.png",
-      //  "32": "images/icon-32.png"
-        "48": "images/icon-48.png",
-        "128": "images/icon-128.png"
         }
-	}
+	},
+
+	"icons": {
+		"16": "/images/icon-16.png",
+        "32": "/images/icon-32.png",
+        "48": "/images/icon-48.png",
+        "128": "/images/icon-128.png"
+	  }
 	
 }

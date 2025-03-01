@@ -19,6 +19,9 @@ button {
 	background-color: #000000;
 }
 
+.button3 {
+	display: none;
+}
 button:hover{
   color :#115f1f;
   background-color:#FFFFFF;
@@ -33,28 +36,26 @@ button:hover{
 .content {padding:10px;}
 
 span.a {
-  display: inline; 
-  width: 100px;
-  height: 100px;
-  padding: 0px; 
+	display: inline;
+	width: 100px;
+	height: 100px;
+	padding: 0px;
+	
 }
 
 span.b {
-  display: inline; 
-  width: 100px;
-  height: 100px;
-  padding: 40px;  
+	display: inline;
+	width: 100px;
+	height: 100px;
 }
 
 .enligne {
-  display: inline;
-  font-family: 'Georgia';
-  font-weight: bold;
+	display: inline;
+	font-weight: bold;
+	font-size:13px;
 }
- 
+
 p {
-display: block !important ;
-font-family: 'Georgia';
 }
 
 .header {
@@ -73,4 +74,29 @@ h2,h3,h4 {
 .logo {
   text-align: center;
  }
-	  
+
+.personalisation {
+	white-space: pre;
+}
+
+#products {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 100%;
+	border-collapse: collapse;
+}
+#products th {
+	background-color: #115f1f;
+	color: white;
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#myform {
+	max-width: 500px;
+	margin: auto;
+}
+#products td {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
