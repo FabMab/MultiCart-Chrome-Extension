@@ -187,12 +187,12 @@ function getCartContents() {
 		chrome.tabs.update({ url: "https://www.sportsdirect.com/cart" });
 		window.close();
 
-	} else {
-		   addJSON($url);
+	} else {		   
 	       localStorage.setItem("cartCount", 0)
-	       chrome.action.setBadgeText({ 'text': '' });
+		   chrome.action.setBadgeText({ 'text': '' });
+		   addJSON($url);
 
-		   setTimeout(openTab, 2000);
+		  // setTimeout(openTab, 2000);
            }
 }
   
@@ -210,17 +210,17 @@ function getCartContents() {
 	} else if (domain === "Page title") {
 		window.close();
 
-	} else if (domain === "sportsdirect.com" && perso !==null) {
+	} else if (domain === "sportsdirect.com" && perso.textContent !== " ") {
 		chrome.tabs.update({ url: "https://www.sportsdirect.com/cart" });
 		window.close();
 
 	}else if (domain === "sportsdirect/personalisation" && perso !==null) {
 		sendJSON($url);
-		setTimeout(openTab, 2000);
+		//setTimeout(openTab, 2000);
 		
 	}else {
 		  sendJSON($url);
-		  setTimeout(openTab, 2000);
+		 // setTimeout(openTab, 2000);
 	      }
 }
 
@@ -243,7 +243,7 @@ function continueShopping() {
 	} else if (domain === "Page title") {
 		window.close();
 
-	} else if (domain === "sportsdirect.com" && perso.textContent !== "") {
+	} else if (domain === "sportsdirect.com" && perso.textContent !== " ") {
 		chrome.tabs.update({ url: "https://www.sportsdirect.com/cart" });
 		window.close();
 	}else{
@@ -252,7 +252,7 @@ function continueShopping() {
 			    saveJSON();
 			    count++;
 			    localStorage.setItem("cartCount", count);
-			    chrome.action.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+				  chrome.action.setBadgeBackgroundColor({ color: "green" });
 			    chrome.action.setBadgeText({ text: count.toString() })
 			    chrome.tabs.update({ url: "https://beta-muhestores.muhemax.com#shopping" });
 			    window.close();
@@ -261,7 +261,7 @@ function continueShopping() {
 			      addJSON();
 			     count++;
 			     localStorage.setItem("cartCount", count);
-			     chrome.action.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+				  chrome.action.setBadgeBackgroundColor({ color: "green" });
 			     chrome.action.setBadgeText({ text: count.toString() })
 			     chrome.tabs.update({ url: "https://beta-muhestores.muhemax.com#shopping" });
 			     window.close();
@@ -314,6 +314,16 @@ function sendJSON($url) {
 		})
 			const cart = await response.json();
 			console.log(cart);
+			console.log(response.status);
+
+			if (response.status == 400) {
+				alert('Please login to Muhestores before placing an order')
+				chrome.tabs.create({ active: true, url: "https://beta-muhestores.muhemax.com/ " });
+			} else {
+
+				chrome.tabs.create({ active: true, url: "https://beta-muhestores.muhemax.com/checkout?uid=" + uid });
+			}
+
 		    return cart;
 
 	    } catch (error) {
@@ -498,6 +508,16 @@ function addJSON($url) {
 					})
 					const checkoutcart = await response.json();
 					console.log(checkoutcart);
+					console.log(response.status);
+
+					if (response.status == 400) {
+						alert('Please login to Muhestores before placing an order')
+						chrome.tabs.create({ active: true, url: "https://beta-muhestores.muhemax.com/ " });
+					} else {
+
+						chrome.tabs.create({ active: true, url: "https://beta-muhestores.muhemax.com/checkout?uid=" + uid });
+					}
+
 					return checkoutcart;
 
 				} catch (error) {
