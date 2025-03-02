@@ -3,7 +3,7 @@
 
   "name": "Muhestores Extension",
   "description": "Muhestores extension for Chrome",
-  "version": "2.1.11",
+  "version": "2.2.1",
   "author": "FabMab",
 
   "permissions": [
@@ -13,7 +13,8 @@
   ],
 
   "host_permissions": [
-    "https://beta-muhestores.muhemax.com/*"
+    "https://beta-muhestores.muhemax.com/*",
+    "https://muhestores.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
