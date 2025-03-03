@@ -106,6 +106,10 @@ chrome.runtime.sendMessage({ personalisation: pPerso });
                 tmLewin();
                 break;
 
+            case "https://tmlewin.co.uk" + pathname + "?auto_redirect=false&discount=+&edge_redirect=true&locale=en-GB&remove_discount_code=1&skip_shop_pay=true":
+                tmLewin();
+                break;
+
             //tkmaxx
             case "https://www.tkmaxx.com/uk/en/checkout/multi/delivery-method/choose":
                 tkMaxx();
@@ -556,11 +560,11 @@ function clarksDelivery() {
     if (delivery.length == 1) {
 
         delivery[0].click();
-        setTimeout(() => clarks(), 2000)
+        setTimeout(() => clarks(), 1000)
     } else { 
 
     delivery[2].click();
-    setTimeout(() => clarks(), 2000)
+    setTimeout(() => clarks(), 1000)
     }
 }
 //clarks
@@ -604,7 +608,7 @@ function clarks() {
    chrome.runtime.sendMessage({size:pSize});
    
    //quantity & Items
-    var productQuantity = document.querySelectorAll("#__next > div.sc-14c9ab0e-0.iqCKVv > div > section.sc-14c9ab0e-3.icYEUU > aside > ul > li > div > div.sc-dce53de4-3.jBBwZe > div.sc-dce53de4-6.fIhmas > table:nth-child(2) > tbody > tr:nth-child(2) > td");
+    var productQuantity = document.querySelectorAll("div.sc-dce53de4-6.fIhmas > table:nth-child(2) > tbody > tr:nth-child(2) > td span:nth-child(2)");
     var totalItems = [];
     for (var i = 0; i < productQuantity.length; i++) {
         pQuty += productQuantity[i].textContent + n;
@@ -892,7 +896,7 @@ function tmLewin() {
 
     for (var i = 0; i < productName.length; i++) {
         pName += productName[i].innerText + n;
-        pColor = "-" + n;
+        pColor += "-" + n;
     }
    
     chrome.runtime.sendMessage({ product: pName });
