@@ -191,8 +191,6 @@ function getCartContents() {
 	       localStorage.setItem("cartCount", 0)
 		   chrome.action.setBadgeText({ 'text': '' });
 		   addJSON($url);
-
-		  // setTimeout(openTab, 2000);
            }
 }
   
@@ -216,11 +214,9 @@ function getCartContents() {
 
 	}else if (domain === "sportsdirect/personalisation" && perso !==null) {
 		sendJSON($url);
-		//setTimeout(openTab, 2000);
 		
 	}else {
 		  sendJSON($url);
-		 // setTimeout(openTab, 2000);
 	      }
 }
 

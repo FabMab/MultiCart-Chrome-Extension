@@ -228,6 +228,10 @@ chrome.runtime.sendMessage({ personalisation: pPerso });
                 argos();
                 break;
 
+            case "https://www.argos.co.uk/basket?clickOrigin=header:home:trolley":
+                argos();
+                break;
+
             //Chichi
             case "https://www.chichiclothing.com" + pathname + "?buyScence=cart":
               chichi();
@@ -884,7 +888,7 @@ function tmLewin() {
 
     //products
    // var productName = document.querySelectorAll("div._6zbcq51z._6zbcq51y._1fragem28._1fragemnn._6zbcq51u._6zbcq51r._1fragem6t._6zbcq51p._6zbcq51n._1fragemmh._6zbcq51w._1fragemnq._16s97g741 > div > p");
-    var productName = document.querySelectorAll('[class*="_6zbcq51w _1fragemnv _16s97g741"] > div > p'); 
+    var productName = document.querySelectorAll('[class*="_16s97g741"] > div > p'); 
 
     for (var i = 0; i < productName.length; i++) {
         pName += productName[i].innerText + n;
@@ -896,7 +900,7 @@ function tmLewin() {
 
     //size
     //var productSize = document.querySelectorAll("div._6zbcq51z._6zbcq51y._1fragem28._1fragemnn._6zbcq51u._6zbcq51r._1fragem6t._6zbcq51p._6zbcq51n._1fragemmh._6zbcq51w._1fragemnq._16s97g741 > div > div");
-    var productSize = document.querySelectorAll('[class*="_6zbcq51w _1fragemnv _16s97g741"] > div > div');
+    var productSize = document.querySelectorAll('[class*="_16s97g741"] > div > div');
 
     for (var i = 0; i < productSize.length; i++) {
         pSize += productSize[i].innerText + n;
@@ -905,7 +909,7 @@ function tmLewin() {
 
     //quantity
     //var productQuantity = document.querySelectorAll("div._6zbcq51z._6zbcq51y._1fragem28._1fragemnn._6zbcq51t._6zbcq51q._1fragem78._6zbcq51o > div > div > div > div > div > div > span:nth-child(2)");
-    var productQuantity = document.querySelectorAll('[class*="_6zbcq51t _6zbcq51q _1fragem78 _6zbcq51o"] > div > div > div > div > div > div > span:nth-child(2)');
+    var productQuantity = document.querySelectorAll('[class*="_6zbcq51o"] > div > div > div > div > div > div > span:nth-child(2)');
 
     var totalItems = [];
     for (var i = 0; i < productQuantity.length; i++) {
@@ -1155,6 +1159,7 @@ function HawesCurtis() {
     console.log(productName);
     for (var i = 0; i < productName.length; i++) {
         pName += productName[i].textContent + n;
+        pColor += "-" + n;
     }
     chrome.runtime.sendMessage({ product: pName });
     chrome.runtime.sendMessage({ color: pColor });
@@ -1559,7 +1564,7 @@ function toyShop() {
  var productColor = document.getElementsByClassName("item__code");
  for (var i = 0; i < productColor.length; i++) {
      pColor += productColor[i].textContent + n;
-     pSize += " " + n;
+     pSize += "-" + n;
  }
   chrome.runtime.sendMessage({color:pColor}); 
   chrome.runtime.sendMessage({size:pSize});
@@ -1619,8 +1624,6 @@ function toyShopCheckout() {
         pSize += "-" + n;
     }
     chrome.runtime.sendMessage({ color: pColor });
-
-    pSize = " " + n;
     chrome.runtime.sendMessage({ size: pSize });
 
     //quantity & number of items
@@ -1670,7 +1673,7 @@ nItems = quantity[1].textContent;
 chrome.runtime.sendMessage({items:nItems}); 
    
  //Products
- var productName = document.querySelectorAll("a[data-e2e ='product-name']");
+ var productName = document.querySelectorAll("[data-e2e ='product-name']");
   console.log(productName);
   for (var i = 0; i < productName.length; i++) {  
      if (i % 2 == 0){
@@ -1956,8 +1959,8 @@ function matalan() {
     var productName = document.querySelectorAll("span[data-test ='OrderSummaryBasketItem__productName']");
     for (var i = 0; i < productName.length; i++) {
         pName += productName[i].textContent + n;
-        pColor += " " + n;
-        pSize += " " + n;
+        pColor += "-" + n;
+        pSize += "-" + n;
         pQuty += productName[i].nextSibling.innerText.slice(10) + n;
         totalItems.push(parseInt(productName[i].nextSibling.innerText.slice(10), 10))
     }
