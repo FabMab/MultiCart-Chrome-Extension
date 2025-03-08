@@ -114,32 +114,6 @@ chrome.runtime.sendMessage({ personalisation: pPerso });
             case "https://www.tkmaxx.com/uk/en/checkout/multi/delivery-method/choose":
                 tkMaxx();
                 break;
-            //asda
-            case "https://groceries.asda.com/trolley":
-                asda();
-                break;
-
-            //george - Where
-             case "https://direct.asda.com/on/demandware.store/Sites-ASDA-Site/default/Cart-Checkout/where":
-                alert("MUHESTORES MESSAGE:\nPlease select the Delivery option");
-             break;
-            //george - Delivery Address
-            case "https://direct.asda.com/on/demandware.store/Sites-ASDA-Site/default/Cart-Checkout/where/delivery/list-address":       
-                alert("MUHESTORES MESSAGE:\nPlease click 'Next'");
-                break;
-            //george -Delivery section
-             case "https://direct.asda.com/on/demandware.store/Sites-ASDA-Site/default/Cart-Checkout/where/delivery/contact-info":
-                alert("MUHESTORES MESSAGE:\nPlease click 'Next'");
-                break;
-            //george
-            case "https://direct.asda.com/on/demandware.store/Sites-ASDA-Site/default/Cart-Checkout/where/delivery/options":
-                george();
-                break
-
-            //Hawes & Curtis
-            case "https://www.hawesandcurtis.co.uk/checkout/delivery":
-                HawesCurtis();
-                break;
 
             //house of frasier home delivery option
             case "https://www.houseoffraser.co.uk/checkoutsp#launch":
@@ -177,12 +151,12 @@ chrome.runtime.sendMessage({ personalisation: pPerso });
                 } else {
                 superDrug();
                 }
-                break;
+            break;
 
             //AutoDoc
             case "https://www.autodoc.co.uk"+ pathname:
             alert("MUHESTORES MESSAGE:\nPlease Contact us regarding orders from AUTODOC");
-                break;
+            break;
 
             //currys delivery option
             case "https://www.currys.co.uk/app/basket?stage=fulfillmentOptions#fulfillmentOptions":
@@ -213,32 +187,14 @@ chrome.runtime.sendMessage({ personalisation: pPerso });
             //toyshop
             case "https://www.thetoyshop.com/cart":
                 toyShop();
-                break;
+            break;
             //toyshop
             case "https://www.thetoyshop.com/checkout/multi/delivery-address/add":
                 alert("MUHESTORES MESSAGE:\nPlease Click 'Next' At the bottom of the Delivery Address Section");
-                break;
+            break;
             //toyshop checkout
             case "https://www.thetoyshop.com/checkout/multi/delivery-method/choose":
                 toyShopCheckout();
-                break;
-
-            //argos
-            case "https://www.argos.co.uk/basket":
-                argos();
-                break;
-            //argos Trolley Click
-            case "https://www.argos.co.uk/basket?clickOrigin=header:trolley:trolley":
-                argos();
-                break;
-
-            case "https://www.argos.co.uk/basket?clickOrigin=header:home:trolley":
-                argos();
-                break;
-
-            //Chichi
-            case "https://www.chichiclothing.com" + pathname + "?buyScence=cart":
-              chichi();
             break;
             //zara
             case "https://www.zara.com/uk/en/shop/cart":
@@ -1003,205 +959,6 @@ for (var i = 0; i < productPrice.length; i++) {
     
 }
 
-//asda
-function asda() {
-
-    //headers
-    var productHeader = "Product description";
-    var colourHeader = "";
-    var sizeHeader = "";
-
-    chrome.runtime.sendMessage({ productDescription: productHeader });
-    chrome.runtime.sendMessage({ productColour: colourHeader });
-    chrome.runtime.sendMessage({ productSize: sizeHeader });
-    chrome.runtime.sendMessage({ productQuty: QtyHeader });
-    chrome.runtime.sendMessage({ productPrice: priceHeader });
-
-    //Number of items
-    var quantity = document.getElementsByClassName("asda-badge asda-badge--primary menu-trolley__total-items-value");
-    for (var i = 0; i < quantity.length; i++) {
-        nItems = quantity[i].textContent;
-    }
-    chrome.runtime.sendMessage({ items: nItems });
-
-
-    //Products
-    var productName = document.querySelectorAll("a[data-auto-id='linkTitle']");
-    console.log(productName);
-    var products;
-    for (var i = 0; i < productName.length; i++) {
-        pName += productName[i].textContent + n;
-        pColor += "-" + n;
-        pSize += "-" + n;
-    }
-
-    chrome.runtime.sendMessage({ product: pName });
-    chrome.runtime.sendMessage({ color: pColor });
-    chrome.runtime.sendMessage({ size: pSize });
-
-    //Quantity
-    var productQuantity = document.getElementsByClassName("manual-input");
-    var Quty;
-    for (var i = 0; i < productQuantity.length; i++) {
-        pQuty += productQuantity[i].value + n;
-    }
-    chrome.runtime.sendMessage({ quantity: pQuty });
-
-
-    //Price
-    var productPrice = document.getElementsByClassName("ingredient__price");
-    console.log(productPrice);
-    var price;
-    for (var i = 0; i < productPrice.length; i++) {
-        pPrice += productPrice[i].innerText + n;
-    }
-    chrome.runtime.sendMessage({ price: pPrice });
-
-    // Total +& Delivery
-    var subtotal = document.getElementsByClassName("menu-trolley__value");
-    pPerso = "Subtotal:  <b>"+subtotal[0].innerText +"</b><br>ASDA Standard Delivery: <b>£5.00</b>";
-    deliveryTotal = [5.00];
-    
-
-    stringTotal = subtotal[0].innerText.slice(1);
-  
-    deliveryTotal.push(parseFloat(stringTotal));
-    sum = deliveryTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    total = "£" + sum.toFixed(2);
-
-    chrome.runtime.sendMessage({ personalisation: pPerso });
-    chrome.runtime.sendMessage({ subtotal: total });
-
-}
-
-//george
-function george() {
-    //headers
-    var productHeader = "Product";
-    var colourHeader = "Colour";
-    var sizeHeader = "Size";
-
-    chrome.runtime.sendMessage({ productDescription: productHeader });
-    chrome.runtime.sendMessage({ productColour: colourHeader });
-    chrome.runtime.sendMessage({ productSize: sizeHeader });
-    chrome.runtime.sendMessage({ productQuty: QtyHeader });
-    chrome.runtime.sendMessage({ productPrice: priceHeader });
-
-    // Products
-    var productName = document.getElementsByClassName("product-name");
-    for (var i = 0; i < productName.length / 2; i++) {
-        pName += productName[i].textContent + n;
-
-    }
-    chrome.runtime.sendMessage({ product: pName });
-
-    //Colour & size
-    var productWrapper = document.getElementsByClassName("product-info was-now-pricing");
-
-    for (var i = 0; i < productWrapper.length / 2; i++) {
-        if (productWrapper[i].childNodes.length == 2) {
-            pColor += "-" + n;
-            pSize += "-" + n;
-        }
-        if (productWrapper[i].childNodes.length == 3) {
-
-            pColor += productWrapper[i].childNodes[1].firstChild.lastChild.innerText + n;
-            pSize += productWrapper[i].childNodes[1].lastChild.lastChild.innerText + n;
-
-        }
-    }  
-    chrome.runtime.sendMessage({ color: pColor });
-    chrome.runtime.sendMessage({ size: pSize });
-    
-
-    //Quantity & number of items
-    var productQuantity = document.querySelectorAll("div.product-quantity > span.attribute-value");
-    for (var i = 0; i < productQuantity.length / 2; i++) {
-        pQuty += productQuantity[i].textContent + n;
-        totalItems.push(parseInt(productQuantity[i].textContent, 10));
-    }
-    nItems = totalItems.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    chrome.runtime.sendMessage({ quantity: pQuty });
-    chrome.runtime.sendMessage({ items: nItems });
-
-    //price
-    var productPrice = document.querySelectorAll("div.price-container > div");
-    var test = document.getElementsByClassName("product__price-value bold")
-    for (var i = 0; i < productPrice.length / 2; i++) {
-        if (productPrice[i].childNodes[1]) {
-
-            pPrice += productPrice[i].childNodes[1].lastChild.textContent + n;
-        } else {
-            pPrice += productPrice[i].textContent + n;
-        }
-    }
-    console.log(test);
-    chrome.runtime.sendMessage({ price: pPrice });
-
-    // total
-    var subtotal = document.querySelectorAll("div.total-section > div.basket-total.flex-grid.flex-grid--stretch.flex-grid--wrap.bold > span.total-amount");
-    var total = subtotal[0].textContent;
-    chrome.runtime.sendMessage({ subtotal: total });
-}
-
-//Hawes & Curtis
-function HawesCurtis() {
-
-    //headers
-    var productHeader = "Product";
-    var colourHeader = "";
-    var sizeHeader = "Size";
-
-    chrome.runtime.sendMessage({ productDescription: productHeader });
-    chrome.runtime.sendMessage({ productColour: colourHeader });
-    chrome.runtime.sendMessage({ productSize: sizeHeader });
-    chrome.runtime.sendMessage({ productQuty: QtyHeader });
-    chrome.runtime.sendMessage({ productPrice: priceHeader });
-   
-    //products & colour
-    var productName = document.getElementsByClassName("name");
-    console.log(productName);
-    for (var i = 0; i < productName.length; i++) {
-        pName += productName[i].textContent + n;
-        pColor += "-" + n;
-    }
-    chrome.runtime.sendMessage({ product: pName });
-    chrome.runtime.sendMessage({ color: pColor });
- 
-    //Size
-    var productSize = document.getElementsByClassName("size");
-    for (var i = 0; i < productSize.length; i++) {
-        pSize += productSize[i].innerText.substring(6) + n;
-    }
-    chrome.runtime.sendMessage({ size: pSize });
-
-    //Quantity & number of Items
-    var productQuantity = document.getElementsByClassName("quantity");
-    var totalItems = [];
-
-    for (var i = 0; i < productQuantity.length; i++) {
-        pQuty += productQuantity[i].innerText.slice(5) + n;
-        totalItems.push(parseInt(productQuantity[i].innerText.slice(5), 10));
-    }
-    nItems = totalItems.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    chrome.runtime.sendMessage({ quantity: pQuty });
-    chrome.runtime.sendMessage({ items: nItems });
-
-    //Price
-    var productPrice = document.getElementsByClassName("retail-price");
-    for (var i = 0; i < productPrice.length; i++) {
-        pPrice += productPrice[i].innerText + n;
-    }
-    chrome.runtime.sendMessage({ price: pPrice });
-
-    //Total
-    var subtotal = document.getElementsByClassName("grand-total");
-    console.log(subtotal);
-    for (var i = 0; i < subtotal.length; i++) {
-        total = subtotal[i].textContent;
-    }
-    chrome.runtime.sendMessage({ subtotal: total });
-}
 
 //houseofFrasier
 function houseOfFrasier() {
@@ -1722,61 +1479,6 @@ for (var i = 0; i < productPrice.length; i++) {
     chrome.runtime.sendMessage({subtotal:total});
 
 }
-
-//chichi
-function chichi() {
-    //headers
-    var productHeader = "Product";
-    var colourHeader = "";
-    var sizeHeader = "Size";
-
-    chrome.runtime.sendMessage({ productDescription: productHeader });
-    chrome.runtime.sendMessage({ productColour: colourHeader });
-    chrome.runtime.sendMessage({ productSize: sizeHeader });
-    chrome.runtime.sendMessage({ productQuty: QtyHeader });
-    chrome.runtime.sendMessage({ productPrice: priceHeader });
-
-//Products
-    var productName = document.getElementsByClassName("sl-textEllipsis2");
-
-    for (var i = 0; i < productName.length/2; i++) {  
-        pName += productName[i].textContent + n;
-        pColor += " - " + n;
-    } 
-    chrome.runtime.sendMessage({product:pName}); 
-    chrome.runtime.sendMessage({color:pColor});
-
- //Size
-    var productSize = document.getElementsByClassName("trade_sku-item_skuProperties");
-    console.log(productSize);
-   for (var i = 0; i < productSize.length/2; i++) {
-    pSize += productSize[i].innerText+ n;
-   }
-   chrome.runtime.sendMessage({size:pSize}); 
-
- //Quantity & number of Items
-    var productQuantity = document.getElementsByClassName("trade_sku-item_skuNum notranslate");
-    console.log(productQuantity);
-    for (var i = 0; i < productQuantity.length/2; i++) {
-        pQuty += productQuantity[i].innerText +n;
-        totalItems.push(parseInt(productQuantity[i].innerText, 10));
-    }
-    nItems = totalItems.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    chrome.runtime.sendMessage({items:nItems}); 
-    chrome.runtime.sendMessage({quantity:pQuty});
-
-//Price
-    var productPrice = document.getElementsByClassName("trade_sku-item_skuPrice sl-textEllipsis");
-for (var i = 0; i < productPrice.length/2; i++) {
-    pPrice += productPrice[i].textContent +n;
- }
- chrome.runtime.sendMessage({price:pPrice});
-
-// send the total a chrome message
-    var subtotal = document.getElementsByClassName("trade_summations__amount-price");
-    total= subtotal[18].textContent;
-    chrome.runtime.sendMessage({subtotal:total});
- }
 
 //marks&spencers delivery
 function MandSDelivery() {
