@@ -171,7 +171,7 @@ function getCartContents() {
 
     function multipleckOut() {
 
-	$url = "https://beta-muhestores.muhemax.com/submit";
+	$url = "xxxxxx";
 	var domain = document.getElementById("pagetitle").innerText;
 	var perso = document.getElementById('personalisation-du-produit');
 
@@ -197,7 +197,7 @@ function getCartContents() {
   
     function checkOut() {
 
-	$url = "https://beta-muhestores.muhemax.com/submit";
+	$url = "xxxxxx";
 	var domain = document.getElementById("pagetitle").innerText;
 	var perso = document.getElementById('personalisation-du-produit');
 	console.log(perso)
@@ -227,7 +227,7 @@ function openTab() {
 
 function continueShopping() {
 
-    $url = "https://beta-muhestores.muhemax.com/submit";	
+    $url = "xxxxxx";	
 
 	let count = localStorage.getItem("cartCount");
 	var domain = document.getElementById("pagetitle").innerText;
