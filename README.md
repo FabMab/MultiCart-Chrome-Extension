@@ -11,4 +11,4 @@ The extension is available [here](https://chromewebstore.google.com/detail/muhes
 
 ### Use
 
-The source code is made public for developers wishing to develop similar Google Chrome. API URLs are obfuscated. 
+The source code is made public for developers wishing to develop similar Google Chrome Extensions. API URLs are obfuscated. 
